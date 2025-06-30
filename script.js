@@ -1,17 +1,28 @@
 const galleryData = [
   {
-    id: "marin01",
-    imgUrl: "https://i.ibb.co/8LWWf2M1/Mari-n-kitagawa.png",
-    desc: "✦ Marin Kitagawa – Lineart completo. ¡Gracias por verlo!"
+    id: "akanehououji01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png",
+    desc: "✦ Akane Hououji flotando en el aire. ¡Gracias por apoyar!"
   },
   {
-    id: "marin02",
-    imgUrl: "https://i.ibb.co/8LWWf2M1/Mari-n-kitagawa.png",
-    desc: "✦ Marin Kitagawa – Otra toma. ¡Gracias por apoyar!"
+    id: "cowgirl01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
+    desc: "✦ Goblin Slayer - Cowgirl con un peinado diferente. ¡Gracias por apoyar!"
   }
 ];
 
 const gallery = document.getElementById("gallery");
+
+// Likes solo en localStorage
+function getLikes(imageId) {
+  return parseInt(localStorage.getItem(`likes-${imageId}`) || "0", 10);
+}
+
+function incrementLikes(imageId) {
+  let count = getLikes(imageId) + 1;
+  localStorage.setItem(`likes-${imageId}`, count);
+  return count;
+}
 
 galleryData.forEach(item => {
   const card = document.createElement("div");
@@ -30,18 +41,15 @@ galleryData.forEach(item => {
   const likeBtn = document.createElement("button");
   likeBtn.className = "like-btn";
 
-  const storedLikes = localStorage.getItem(`like-${item.id}`);
-  let likes = storedLikes ? parseInt(storedLikes) : 0;
+  let likes = getLikes(item.id);
   let liked = localStorage.getItem(`liked-${item.id}`) === "true";
-
   likeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
   likeBtn.disabled = liked;
 
   likeBtn.onclick = () => {
     if (!liked) {
-      likes++;
+      likes = incrementLikes(item.id);
       liked = true;
-      localStorage.setItem(`like-${item.id}`, likes);
       localStorage.setItem(`liked-${item.id}`, "true");
       likeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
       likeBtn.disabled = true;
@@ -73,9 +81,7 @@ galleryData.forEach(item => {
 
   function renderModalLikes(itemData) {
     const modalLikes = document.getElementById("imgModalLikes");
-    // Crear un botón de likes similar al de la galería
-    const storedLikes = localStorage.getItem(`like-${itemData.id}`);
-    let likes = storedLikes ? parseInt(storedLikes) : 0;
+    let likes = getLikes(itemData.id);
     let liked = localStorage.getItem(`liked-${itemData.id}`) === "true";
     modalLikes.innerHTML = "";
     const modalLikeBtn = document.createElement("button");
@@ -84,9 +90,8 @@ galleryData.forEach(item => {
     modalLikeBtn.disabled = liked;
     modalLikeBtn.onclick = () => {
       if (!liked) {
-        likes++;
+        likes = incrementLikes(itemData.id);
         liked = true;
-        localStorage.setItem(`like-${itemData.id}`, likes);
         localStorage.setItem(`liked-${itemData.id}`, "true");
         modalLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
         modalLikeBtn.disabled = true;

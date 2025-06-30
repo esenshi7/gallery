@@ -31,6 +31,7 @@ body {
   border-radius: 50%;
   aspect-ratio: 1/1;
   object-fit: cover;
+  object-position: center 10%; /* Mueve la imagen un poco más hacia abajo para mostrar más la parte superior */
   box-shadow: 0 2px 12px rgba(0,0,0,0.10);
 }
 
