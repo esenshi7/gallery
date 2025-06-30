@@ -8,14 +8,19 @@ const galleryData = [
   {
     id: "akanehououji01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png",
-    desc: "✦ Akane Hououji flotando en el aire. ¡Gracias por apoyar!"
+    desc: "✦ Akane Hououji flotando en el aire. ¡Gracias por apoyar!",
+    date: "2024-06-28T10:00:00Z" // Fecha de carga (ejemplo)
   },
   {
     id: "cowgirl01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
-    desc: "✦ Goblin Slayer - Cowgirl con un peinado diferente. ¡Gracias por apoyar!"
+    desc: "✦ Goblin Slayer - Cowgirl con un peinado diferente. ¡Gracias por apoyar!",
+    date: "2024-06-25T15:30:00Z" // Fecha de carga (ejemplo)
   }
 ];
+
+// Ordenar por fecha de carga (más reciente primero)
+galleryData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 const gallery = document.getElementById("gallery");
 
@@ -160,6 +165,71 @@ supabase
     }
   )
   .subscribe();
+
+// --- Featured Art Like Button ---
+const featuredArt = document.getElementById("featuredArt");
+if (featuredArt) {
+  const featuredImg = featuredArt.querySelector("img");
+  const featuredBtns = featuredArt.querySelector(".featured-btns");
+  const featuredId = featuredImg?.dataset.imageId || "featured";
+
+  // Busca el objeto en galleryData por URL, si existe
+  let featuredData = galleryData.find(img => img.imgUrl === featuredImg.src);
+  if (!featuredData) {
+    // Si no está en galleryData, crea un objeto temporal
+    featuredData = {
+      id: featuredId,
+      imgUrl: featuredImg.src,
+      desc: featuredImg.alt,
+      date: new Date().toISOString()
+    };
+  }
+
+  // Crear botón de likes
+  const featuredLikeBtn = document.createElement("button");
+  featuredLikeBtn.className = "like-btn";
+  featuredLikeBtn.dataset.imageId = featuredData.id;
+  featuredLikeBtn.innerHTML = "❤️ ...";
+  featuredLikeBtn.disabled = localStorage.getItem(`liked-${featuredData.id}`) === "true";
+
+  // Renderizar likes iniciales
+  async function renderFeaturedLikes() {
+    let likes = await getLikesFromSupabase(featuredData.id);
+    let liked = localStorage.getItem(`liked-${featuredData.id}`) === "true";
+    featuredLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
+    featuredLikeBtn.disabled = liked;
+  }
+  renderFeaturedLikes();
+
+  featuredLikeBtn.onclick = async () => {
+    let liked = localStorage.getItem(`liked-${featuredData.id}`) === "true";
+    if (!liked) {
+      let likes = await incrementLikesInSupabase(featuredData.id);
+      localStorage.setItem(`liked-${featuredData.id}`, "true");
+      featuredLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
+      featuredLikeBtn.disabled = true;
+    }
+  };
+
+  // Insertar el botón en un renglón separado antes del de Full Image
+  const likeRow = featuredBtns.querySelector('.featured-like-row');
+  likeRow.appendChild(featuredLikeBtn);
+
+  // Actualización en tiempo real para el featured
+  supabase
+    .channel('public:likes')
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'likes' },
+      async payload => {
+        const imageId = payload.new?.image_id || payload.old?.image_id;
+        if (imageId === featuredData.id) {
+          renderFeaturedLikes();
+        }
+      }
+    )
+    .subscribe();
+}
 
 // Obtiene el número de likes desde Supabase para una imagen
 async function getLikesFromSupabase(imageId) {
