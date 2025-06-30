@@ -1,8 +1,19 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4;
+  background: linear-gradient(to bottom, #eaf4fb 0%, #b3d8f6 60%, #6ba7d6 100%);
   color: #222;
+  min-height: 100vh;
+}
+
+.main-container {
+  max-width: 1300px;
+  margin: 32px auto 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  padding: 0 0 24px 0;
+  min-height: 90vh;
 }
 
 /* Encabezado */
@@ -56,7 +67,7 @@ body {
 .gallery-title {
   text-align: center;
   font-family: 'Comic Sans MS', 'Comic Sans', 'Arial Rounded MT Bold', cursive, sans-serif;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: #111;
   margin-top: 40px;
   margin-bottom: 0;
@@ -179,7 +190,6 @@ body {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  /* Ajusta el tamaño máximo del modal aquí */
   max-width: 1200px;
   width: 98vw;
   max-height: 92vh;
@@ -188,7 +198,6 @@ body {
 }
 
 .img-modal-content {
-  /* Ajusta el ancho de la imagen aquí */
   max-width: 70vw;
   min-width: 420px;
   width: 900px;
@@ -203,7 +212,8 @@ body {
   padding: 32px 32px 24px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
   min-width: 260px;
   max-width: 400px;
   width: 100%;
@@ -213,12 +223,13 @@ body {
 .img-modal-desc {
   font-size: 1.1rem;
   color: #222;
-  margin-bottom: 32px;
+  margin-bottom: 8px; /* Mucho más cerca del siguiente elemento */
   word-break: break-word;
 }
 
 .img-modal-likes {
-  margin-top: auto;
+  margin-top: 20px; /* Sin espacio extra arriba */
+  margin-bottom: 200px; /* Espacio solo antes del botón central */
   text-align: left;
 }
 
@@ -238,6 +249,18 @@ body {
 
 .img-modal-close:hover {
   color: #d9534f;
+}
+
+.img-modal-full-btn {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.img-modal-full-btn .featured-btn {
+  margin: 0 auto;
 }
 
 @media (max-width: 700px) {
@@ -265,6 +288,152 @@ body {
   color: #888;
   margin: 40px 0 20px 0;
   padding: 0 16px;
+}
+
+/* Sección Destacada */
+.featured-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3.5px solid #1a365d;
+  border-radius: 22px;
+  background: #f7fbff;
+  margin: 60px auto 110px auto;
+  width: 80%;
+  max-width: 1200px;
+  min-height: 340px;
+  box-shadow: 0 6px 32px rgba(26,54,93,0.10);
+  padding: 36px 32px;
+  gap: 40px;
+}
+
+.featured-img img {
+  width: auto;
+  aspect-ratio: 1/1;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+  background: #eaf4fb;
+}
+
+.featured-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.featured-title {
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Comic Sans', 'Arial Rounded MT Bold', cursive, sans-serif;
+  font-size: 1.75rem;
+  color: #111;
+  margin-top: 40px;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.featured-desc {
+  font-size: 1.20rem;
+  color: #333;
+  margin-bottom: 32px;
+}
+
+.featured-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: #111;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 18px 38px;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.13);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.featured-btn:hover {
+  background: #222;
+  transform: scale(1.06);
+}
+
+.brush-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 1100px) {
+  .featured-section {
+    max-width: 98vw;
+    padding: 24px 6vw;
+    gap: 24px;
+  }
+  .featured-img img {
+    width: 60vw;
+    max-width: 340px;
+    height: auto;
+  }
+}
+@media (max-width: 800px) {
+  .featured-section {
+    flex-direction: column;
+    padding: 20px 8px;
+    gap: 18px;
+    min-height: unset;
+  }
+  .featured-img img {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+  }
+  .featured-info {
+    align-items: center;
+    text-align: center;
+  }
+  .featured-title {
+    font-size: 2.1rem;
+  }
+  .featured-desc {
+    font-size: 1.05rem;
+  }
+  .featured-btn {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+  .brush-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Divider between Featured section and Gallery */
+.section-divider {
+  border: none;
+  border-top: 3px solid #d0d2d4;
+  margin: 36px auto 48px auto;
+  width: 80%;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(90, 156, 203, 0.1);
+}
+
+/* Nuevo título 'Featured Art' */
+.featured-art-title {
+  text-align: left;
+  font-family: 'Comic Sans MS', 'Comic Sans', 'Arial Rounded MT Bold', cursive, sans-serif;
+  font-size: 3.5rem;
+  color: #111;
+  margin: 60px 0 0 8%;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 /* Puedes experimentar cambiando los valores de max-width, width y min-width en .img-modal-instagram y .img-modal-content para ajustar el tamaño del modal y la proporción entre imagen y área blanca. */
