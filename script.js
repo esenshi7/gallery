@@ -46,6 +46,7 @@ galleryData.forEach(async item => {
 
   const likeBtn = document.createElement("button");
   likeBtn.className = "like-btn";
+  likeBtn.dataset.imageId = item.id; // Añadido data-image-id
 
   // --- Obtener likes globales desde Supabase ---
   let likes = await getLikesFromSupabase(item.id);
@@ -94,6 +95,7 @@ galleryData.forEach(async item => {
     modalLikes.innerHTML = "";
     const modalLikeBtn = document.createElement("button");
     modalLikeBtn.className = "like-btn";
+    modalLikeBtn.dataset.imageId = itemData.id; // Añadido data-image-id
     modalLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
     modalLikeBtn.disabled = liked;
     modalLikeBtn.onclick = async () => {
@@ -129,6 +131,35 @@ imgModal.addEventListener("click", (e) => {
     imgModal.classList.remove("active");
   }
 });
+
+// Suscripción a cambios en la tabla de likes (Realtime)
+supabase
+  .channel('public:likes')
+  .on(
+    'postgres_changes',
+    { event: '*', schema: 'public', table: 'likes' },
+    async payload => {
+      const imageId = payload.new?.image_id || payload.old?.image_id;
+      if (!imageId) return;
+      // Actualiza todos los botones de la galería
+      const likeBtns = document.querySelectorAll('.like-btn');
+      for (const btn of likeBtns) {
+        if (btn.dataset.imageId === imageId) {
+          const likes = await getLikesFromSupabase(imageId);
+          btn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
+        }
+      }
+      // Si el modal está abierto y corresponde, actualiza el contador del modal
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("imgModalImg");
+      if (modal.classList.contains("active") && modalImg.dataset.imageId === imageId) {
+        // Busca el itemData por id
+        const itemData = galleryData.find(img => img.id === imageId);
+        if (itemData) renderModalLikes(itemData);
+      }
+    }
+  )
+  .subscribe();
 
 // Obtiene el número de likes desde Supabase para una imagen
 async function getLikesFromSupabase(imageId) {
