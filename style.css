@@ -242,7 +242,7 @@ body {
   color: #222;
   cursor: pointer;
   font-weight: bold;
-  z-index: 1100;
+  z-index: 2000; /* Aumenta el z-index para asegurar visibilidad */
   background: none;
   border: none;
   transition: color 0.2s;
@@ -274,12 +274,13 @@ body {
     right: 8px;
     width: 64px;
     height: 64px;
+    z-index: 2000;
   }
 
   .img-modal-close svg {
     width: 44px;
     height: 44px;
-    color: #fff !important;
+    color: #222 !important;
     /* Fuerza blanco en móvil */
     filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55));
   }
