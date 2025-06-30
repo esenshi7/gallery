@@ -58,8 +58,20 @@ body {
 }
 
 .gallery-card img {
-  width: 100%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.gallery-card img:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
 .card-body {
@@ -85,4 +97,42 @@ body {
 
 .like-btn:hover {
   background: #222;
+}
+
+/* Modal para imagen grande */
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.img-modal.active {
+  display: flex;
+}
+
+.img-modal-content {
+  max-width: 98vw;
+  max-height: 95vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.img-modal-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1100;
+  background: none;
+  border: none;
 }

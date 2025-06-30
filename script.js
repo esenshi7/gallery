@@ -48,10 +48,29 @@ galleryData.forEach(item => {
     }
   };
 
+  img.addEventListener("click", () => {
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("imgModalImg");
+    modalImg.src = item.imgUrl;
+    modalImg.alt = item.desc;
+    modal.classList.add("active");
+  });
+
   body.appendChild(desc);
   body.appendChild(likeBtn);
 
   card.appendChild(img);
   card.appendChild(body);
   gallery.appendChild(card);
+});
+
+const imgModal = document.getElementById("imgModal");
+const imgModalClose = document.getElementById("imgModalClose");
+imgModalClose.addEventListener("click", () => {
+  imgModal.classList.remove("active");
+});
+imgModal.addEventListener("click", (e) => {
+  if (e.target === imgModal) {
+    imgModal.classList.remove("active");
+  }
 });
