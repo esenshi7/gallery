@@ -1,3 +1,9 @@
+// --- Supabase Likes Logic ---
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+const supabaseUrl = 'https://qofkgqlhyzirokodbpuj.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZmtncWxoeXppcm9rb2RicHVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyNjg5MDUsImV4cCI6MjA2Njg0NDkwNX0.dVWR1Qb6nLnd2ZUpRkRv0JlIyA2rNK2lb4eSZMad3w8';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const galleryData = [
   {
     id: "akanehououji01",
@@ -24,7 +30,7 @@ function incrementLikes(imageId) {
   return count;
 }
 
-galleryData.forEach(item => {
+galleryData.forEach(async item => {
   const card = document.createElement("div");
   card.className = "gallery-card";
 
@@ -41,14 +47,15 @@ galleryData.forEach(item => {
   const likeBtn = document.createElement("button");
   likeBtn.className = "like-btn";
 
-  let likes = getLikes(item.id);
+  // --- Obtener likes globales desde Supabase ---
+  let likes = await getLikesFromSupabase(item.id);
   let liked = localStorage.getItem(`liked-${item.id}`) === "true";
   likeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
   likeBtn.disabled = liked;
 
-  likeBtn.onclick = () => {
+  likeBtn.onclick = async () => {
     if (!liked) {
-      likes = incrementLikes(item.id);
+      likes = await incrementLikesInSupabase(item.id);
       liked = true;
       localStorage.setItem(`liked-${item.id}`, "true");
       likeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
@@ -79,18 +86,19 @@ galleryData.forEach(item => {
     modal.classList.add("active");
   });
 
-  function renderModalLikes(itemData) {
+  // Renderiza los likes en el modal
+  async function renderModalLikes(itemData) {
     const modalLikes = document.getElementById("imgModalLikes");
-    let likes = getLikes(itemData.id);
+    let likes = await getLikesFromSupabase(itemData.id);
     let liked = localStorage.getItem(`liked-${itemData.id}`) === "true";
     modalLikes.innerHTML = "";
     const modalLikeBtn = document.createElement("button");
     modalLikeBtn.className = "like-btn";
     modalLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
     modalLikeBtn.disabled = liked;
-    modalLikeBtn.onclick = () => {
+    modalLikeBtn.onclick = async () => {
       if (!liked) {
-        likes = incrementLikes(itemData.id);
+        likes = await incrementLikesInSupabase(itemData.id);
         liked = true;
         localStorage.setItem(`liked-${itemData.id}`, "true");
         modalLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
@@ -122,12 +130,40 @@ imgModal.addEventListener("click", (e) => {
   }
 });
 
-// Prueba de conexión a Supabase (versión ES6 módulo)
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-const supabaseUrl = 'https://qofkgqlhyzirokodbpuj.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZmtncWxoeXppcm9rb2RicHVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyNjg5MDUsImV4cCI6MjA2Njg0NDkwNX0.dVWR1Qb6nLnd2ZUpRkRv0JlIyA2rNK2lb4eSZMad3w8';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Obtiene el número de likes desde Supabase para una imagen
+async function getLikesFromSupabase(imageId) {
+  const { data, error } = await supabase
+    .from('likes')
+    .select('count')
+    .eq('image_id', imageId)
+    .maybeSingle();
+  if (error) return 0;
+  if (!data) {
+    // Si no existe, crea el registro con count = 0
+    await supabase.from('likes').insert([{ image_id: imageId, count: 0 }]);
+    return 0;
+  }
+  return data.count;
+}
 
+// Incrementa el contador de likes en Supabase para una imagen
+async function incrementLikesInSupabase(imageId) {
+  const { data, error } = await supabase
+    .from('likes')
+    .select('count')
+    .eq('image_id', imageId)
+    .maybeSingle();
+  if (data) {
+    const newCount = data.count + 1;
+    await supabase.from('likes').update({ count: newCount }).eq('image_id', imageId);
+    return newCount;
+  } else {
+    await supabase.from('likes').insert([{ image_id: imageId, count: 1 }]);
+    return 1;
+  }
+}
+
+// Prueba de conexión a Supabase (versión ES6 módulo)
 async function testSupabaseConnection() {
   const { data, error } = await supabase.from('test').select('*');
   if (error) {
