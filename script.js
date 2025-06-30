@@ -121,3 +121,15 @@ imgModal.addEventListener("click", (e) => {
     imgModal.classList.remove("active");
   }
 });
+
+// Prueba de conexión a Supabase
+async function testSupabaseConnection() {
+  const { data, error } = await window.mySupabase.from('test').select('*');
+  if (error) {
+    console.error('Error al conectar con Supabase:', error);
+  } else {
+    console.log('Datos recibidos de Supabase:', data);
+  }
+}
+
+testSupabaseConnection();
