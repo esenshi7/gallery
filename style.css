@@ -17,7 +17,10 @@ body {
 
 .hero-img img {
   width: 300px;
-  border-radius: 12px;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
 }
 
 .hero-text {
@@ -26,6 +29,7 @@ body {
 }
 
 .hero-text h1 {
+  font-family: 'Comic Sans MS', 'Comic Sans', 'Arial Rounded MT Bold', cursive, sans-serif;
   font-size: 32px;
   margin-bottom: 10px;
 }
@@ -49,6 +53,17 @@ body {
   padding: 40px;
 }
 
+.gallery-title {
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Comic Sans', 'Arial Rounded MT Bold', cursive, sans-serif;
+  font-size: 2.5rem;
+  color: #111;
+  margin-top: 40px;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
 .gallery-card {
   background: white;
   border-radius: 12px;
@@ -66,12 +81,14 @@ body {
   margin-right: auto;
   cursor: pointer;
   border-radius: 8px;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, transform 0.3s cubic-bezier(.4,1.5,.5,1), filter 0.2s;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .gallery-card img:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transform: scale(1.07);
+  filter: brightness(1.08) saturate(1.1);
 }
 
 .card-body {
@@ -99,6 +116,45 @@ body {
   background: #222;
 }
 
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 40px 0 20px 0;
+}
+
+.social-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 2px solid #eee;
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transform: scale(1.08);
+}
+
+.social-btn svg {
+  width: 40px;
+  height: 40px;
+}
+
+.social-btn.instagram svg circle {
+  fill: #fff;
+}
+
+.social-btn.x svg circle {
+  fill: #fff;
+}
+
 /* Modal para imagen grande */
 .img-modal {
   display: none;
@@ -117,22 +173,98 @@ body {
   display: flex;
 }
 
-.img-modal-content {
-  max-width: 98vw;
-  max-height: 95vh;
-  border-radius: 12px;
+/* --- MODAL TIPO INSTAGRAM --- */
+.img-modal-instagram {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  /* Ajusta el tamaño máximo del modal aquí */
+  max-width: 1200px;
+  width: 98vw;
+  max-height: 92vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-modal-content {
+  /* Ajusta el ancho de la imagen aquí */
+  max-width: 70vw;
+  min-width: 420px;
+  width: 900px;
+  max-height: 92vh;
+  object-fit: contain;
+  background: #222;
+  display: block;
+}
+
+.img-modal-info {
+  background: #fff;
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 260px;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.img-modal-desc {
+  font-size: 1.1rem;
+  color: #222;
+  margin-bottom: 32px;
+  word-break: break-word;
+}
+
+.img-modal-likes {
+  margin-top: auto;
+  text-align: left;
 }
 
 .img-modal-close {
   position: absolute;
-  top: 30px;
-  right: 40px;
+  top: 18px;
+  right: 24px;
   font-size: 40px;
-  color: #fff;
+  color: #222;
   cursor: pointer;
   font-weight: bold;
   z-index: 1100;
   background: none;
   border: none;
+  transition: color 0.2s;
 }
+
+.img-modal-close:hover {
+  color: #d9534f;
+}
+
+@media (max-width: 700px) {
+  .img-modal-instagram {
+    flex-direction: column;
+    max-width: 98vw;
+    width: 98vw;
+    max-height: 98vh;
+  }
+  .img-modal-content {
+    max-width: 100vw;
+    width: 100vw;
+    max-height: 50vh;
+  }
+  .img-modal-info {
+    min-width: 0;
+    max-width: 100vw;
+    padding: 20px 12px 16px 12px;
+  }
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #888;
+  margin: 40px 0 20px 0;
+  padding: 0 16px;
+}
+
+/* Puedes experimentar cambiando los valores de max-width, width y min-width en .img-modal-instagram y .img-modal-content para ajustar el tamaño del modal y la proporción entre imagen y área blanca. */

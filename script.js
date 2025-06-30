@@ -45,16 +45,52 @@ galleryData.forEach(item => {
       localStorage.setItem(`liked-${item.id}`, "true");
       likeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
       likeBtn.disabled = true;
+      // Si el modal está abierto y corresponde a esta imagen, actualiza el botón de likes del modal
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("imgModalImg");
+      if (modal.classList.contains("active") && modalImg.src === item.imgUrl) {
+        renderModalLikes(item);
+      }
     }
   };
 
   img.addEventListener("click", () => {
     const modal = document.getElementById("imgModal");
     const modalImg = document.getElementById("imgModalImg");
+    const modalDesc = document.getElementById("imgModalDesc");
     modalImg.src = item.imgUrl;
     modalImg.alt = item.desc;
+    modalDesc.textContent = item.desc;
+    renderModalLikes(item);
     modal.classList.add("active");
   });
+
+  function renderModalLikes(itemData) {
+    const modalLikes = document.getElementById("imgModalLikes");
+    // Crear un botón de likes similar al de la galería
+    const storedLikes = localStorage.getItem(`like-${itemData.id}`);
+    let likes = storedLikes ? parseInt(storedLikes) : 0;
+    let liked = localStorage.getItem(`liked-${itemData.id}`) === "true";
+    modalLikes.innerHTML = "";
+    const modalLikeBtn = document.createElement("button");
+    modalLikeBtn.className = "like-btn";
+    modalLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
+    modalLikeBtn.disabled = liked;
+    modalLikeBtn.onclick = () => {
+      if (!liked) {
+        likes++;
+        liked = true;
+        localStorage.setItem(`like-${itemData.id}`, likes);
+        localStorage.setItem(`liked-${itemData.id}`, "true");
+        modalLikeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
+        modalLikeBtn.disabled = true;
+        // Actualiza el botón de la galería también
+        likeBtn.innerHTML = `❤️ ${likes} Like${likes !== 1 ? "s" : ""}`;
+        likeBtn.disabled = true;
+      }
+    };
+    modalLikes.appendChild(modalLikeBtn);
+  }
 
   body.appendChild(desc);
   body.appendChild(likeBtn);
