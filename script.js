@@ -122,9 +122,14 @@ imgModal.addEventListener("click", (e) => {
   }
 });
 
-// Prueba de conexión a Supabase
+// Prueba de conexión a Supabase (versión ES6 módulo)
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+const supabaseUrl = 'https://qofkgqlhyzirokodbpuj.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZmtncWxoeXppcm9rb2RicHVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyNjg5MDUsImV4cCI6MjA2Njg0NDkwNX0.dVWR1Qb6nLnd2ZUpRkRv0JlIyA2rNK2lb4eSZMad3w8';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 async function testSupabaseConnection() {
-  const { data, error } = await window.mySupabase.from('test').select('*');
+  const { data, error } = await supabase.from('test').select('*');
   if (error) {
     console.error('Error al conectar con Supabase:', error);
   } else {
