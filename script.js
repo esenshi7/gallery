@@ -7,13 +7,15 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const galleryData = [
   {
     id: "akanehououji01",
-    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji_thumb.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png",
     desc: "✦ Akane Hououji flotando en el aire. ¡Gracias por apoyar!",
     date: "2024-06-28T10:00:00Z" // Fecha de carga (ejemplo)
   },
   {
     id: "cowgirl01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
     desc: "✦ Goblin Slayer - Cowgirl con un peinado diferente. ¡Gracias por apoyar!",
     date: "2024-06-25T15:30:00Z" // Fecha de carga (ejemplo)
   }
@@ -21,6 +23,7 @@ const galleryData = [
 
 // Ordenar por fecha de carga (más reciente primero)
 galleryData.sort((a, b) => new Date(b.date) - new Date(a.date));
+console.log('Orden de galería tras sort:', galleryData.map(i => i.id + ' ' + i.date));
 
 const gallery = document.getElementById("gallery");
 
@@ -80,12 +83,13 @@ galleryData.forEach(async item => {
     const modalImg = document.getElementById("imgModalImg");
     const modalDesc = document.getElementById("imgModalDesc");
     const modalFullBtn = document.getElementById("imgModalFullBtn");
-    modalImg.src = item.imgUrl;
+    modalImg.src = item.modalUrl || item.imgUrl;
     modalImg.alt = item.desc;
+    modalImg.dataset.imageId = item.id;
     modalDesc.textContent = item.desc;
     renderModalLikes(item);
     // Botón Full Image
-    modalFullBtn.innerHTML = `<a href="${item.imgUrl}" class="featured-btn" target="_blank">
+    modalFullBtn.innerHTML = `<a href="${item.modalUrl || item.imgUrl}" class="featured-btn" target="_blank">
       <svg class="brush-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19.5 2.5L21.5 4.5C22.3284 5.32843 22.3284 6.67157 21.5 7.5L10 19L5 20L6 15L17.5 3.5C18.3284 2.67157 19.1716 2.67157 19.5 2.5Z" stroke="#fff" stroke-width="2" fill="none"/><path d="M6 15L9 18" stroke="#fff" stroke-width="2"/></svg>
       Full Image
     </a>`;
