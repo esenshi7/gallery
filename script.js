@@ -14,7 +14,7 @@ const galleryData = [
   },
   {
     id: "cowgirl01",
-    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl_thumb.png",
     modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
     desc: "✦ Goblin Slayer - Cowgirl con un peinado diferente. ¡Gracias por apoyar!",
     date: "2024-06-25T15:30:00Z" // Fecha de carga (ejemplo)
