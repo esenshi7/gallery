@@ -310,6 +310,27 @@ body {
 }
 
 @media (max-width: 700px) {
+  .img-modal-info {
+    align-items: stretch !important;
+  }
+  .img-modal-full-btn {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .img-modal-full-btn .featured-btn {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .img-modal-likes {
+    margin-bottom: 10px !important;
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
   .img-modal-instagram {
     flex-direction: column;
     max-width: 98vw;
