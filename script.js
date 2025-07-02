@@ -279,3 +279,29 @@ async function testSupabaseConnection() {
 }
 
 testSupabaseConnection();
+
+// --- Modal Disclaimer X (Twitter) ---
+const xBtn = document.querySelector('.social-btn.x');
+const xDisclaimerModal = document.getElementById('xDisclaimerModal');
+const xDisclaimerContinue = document.getElementById('xDisclaimerContinue');
+const xDisclaimerCancel = document.getElementById('xDisclaimerCancel');
+
+if (xBtn && xDisclaimerModal && xDisclaimerContinue && xDisclaimerCancel) {
+  xBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    xDisclaimerModal.style.display = 'flex';
+  });
+  xDisclaimerContinue.addEventListener('click', function() {
+    window.open('https://x.com/ecchisenshi', '_blank');
+    xDisclaimerModal.style.display = 'none';
+  });
+  xDisclaimerCancel.addEventListener('click', function() {
+    xDisclaimerModal.style.display = 'none';
+  });
+  // Cerrar modal al hacer clic fuera del contenido
+  xDisclaimerModal.addEventListener('click', function(e) {
+    if (e.target === xDisclaimerModal) {
+      xDisclaimerModal.style.display = 'none';
+    }
+  });
+}
