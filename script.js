@@ -45,6 +45,16 @@ galleryData.forEach(async item => {
   const img = document.createElement("img");
   img.src = item.imgUrl;
   img.alt = item.desc;
+  // Evento para Google Analytics: clic en imagen de galería
+  img.addEventListener("click", () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'click_imagen_galeria', {
+        event_category: 'Galeria',
+        event_label: item.id,
+        value: 1
+      });
+    }
+  });
 
   const body = document.createElement("div");
   body.className = "card-body";
@@ -89,10 +99,25 @@ galleryData.forEach(async item => {
     modalDesc.textContent = item.desc;
     renderModalLikes(item);
     // Botón Full Image
-    modalFullBtn.innerHTML = `<a href="${item.modalUrl || item.imgUrl}" class="featured-btn" target="_blank">
+    modalFullBtn.innerHTML = `<a href="${item.modalUrl || item.imgUrl}" class="featured-btn" target="_blank" id="modalFullImageBtn">
       <svg class="brush-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19.5 2.5L21.5 4.5C22.3284 5.32843 22.3284 6.67157 21.5 7.5L10 19L5 20L6 15L17.5 3.5C18.3284 2.67157 19.1716 2.67157 19.5 2.5Z" stroke="#fff" stroke-width="2" fill="none"/><path d="M6 15L9 18" stroke="#fff" stroke-width="2"/></svg>
       Full Image
     </a>`;
+    // Evento para Google Analytics: clic en Full Image del modal
+    setTimeout(() => {
+      const fullBtn = document.getElementById("modalFullImageBtn");
+      if (fullBtn) {
+        fullBtn.addEventListener("click", () => {
+          if (typeof gtag === 'function') {
+            gtag('event', 'click_full_image', {
+              event_category: 'Galeria',
+              event_label: item.id,
+              value: 1
+            });
+          }
+        });
+      }
+    }, 0);
     modal.classList.add("active");
   });
 
@@ -214,6 +239,20 @@ if (featuredArt) {
       featuredLikeBtn.disabled = true;
     }
   };
+
+  // Evento para Google Analytics: clic en Full Image de Featured Art
+  const featuredFullBtn = featuredArt.querySelector(".featured-full-row .featured-btn");
+  if (featuredFullBtn) {
+    featuredFullBtn.addEventListener("click", function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_full_image', {
+          event_category: 'FeaturedArt',
+          event_label: featuredId,
+          value: 1
+        });
+      }
+    });
+  }
 
   // Insertar el botón en un renglón separado antes del de Full Image
   const likeRow = featuredBtns.querySelector('.featured-like-row');
