@@ -372,12 +372,13 @@ body {
 @media (max-width: 700px) {
   .gallery-card img,
   #gallery-main .gallery-card img {
-    width: 72vw;
-    max-width: 240px;
-    height: auto;
-    min-height: 140px;
+    width: 88vw;
+    max-width: 320px;
+    height: 320px;
+    min-height: 180px;
     aspect-ratio: 3/4;
     object-fit: cover;
+    object-position: center center;
     border-radius: 8px;
     margin-left: auto;
     margin-right: auto;
