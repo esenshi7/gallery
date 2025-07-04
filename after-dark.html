@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Galería Esenshi7</title>
+  <title>After Dark Room - Esenshi7</title>
   <link rel="stylesheet" href="style.css?v=2" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0N5QQ101R3"></script>
@@ -16,42 +16,40 @@
 </head>
 <body>
   <div class="main-container">
-    <!-- Encabezado -->
     <header class="hero">
       <div class="hero-img">
         <img src="https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//MinamiFuyuki_thumb.png" alt="Esenshi7">
       </div>
       <div class="hero-text">
-        <h1>Bienvenidos!</h1>
-        <br>
-        <p>¡Hola! Soy Esenshi7, ilustrador digital de waifus y estilo manga.</p>
-        <p>Aquí puedes explorar versiones completas de mis obras y acceder a ilustraciones exclusivas fuera de redes.</p>
+        <h1 style="font-size:32px;margin-bottom:10px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:32px;">🌙</span> Bienvenido al After Dark Room
+        </h1>
+        <p>Un espacio para versiones alternativas de mis ilustraciones con un enfoque más sensual y artístico.</p>
+        <p>Atuendos más atrevidos, siluetas resaltadas y escenas que juegan con lo sugerente.</p>
+        <p>No todo es explícito, pero está diseñado para encender la imaginación.</p>
+        <p class="warning" style="color:#e57373;">Este espacio está dirigido a una audiencia madura</p>
       </div>
     </header>
 
-    <!-- Menú Home y After Dark Room centrado respecto al contenido principal -->
-    <div style="max-width:600px;margin:12px auto 0 auto;display:flex;justify-content:center;align-items:center;gap:28px;">
+    <!-- Solo botón Home centrado y grande -->
+    <div style="max-width:600px;margin:12px auto 0 auto;display:flex;justify-content:center;align-items:center;">
       <a href="/" style="display:inline-flex;align-items:center;gap:10px;font-size:1.45rem;font-weight:700;color:#222;text-decoration:none;background:rgba(255,255,255,0.92);border-radius:12px;padding:13px 32px 13px 20px;box-shadow:0 3px 12px rgba(90,156,203,0.10);transition:background 0.18s,color 0.18s;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;"><path d="M3 12L12 4l9 8" stroke="#222" stroke-width="2" fill="none"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1V10" stroke="#222" stroke-width="2" fill="#f7e7b7"/></svg>
         Home
       </a>
-      <a href="/after-dark.html" style="display:inline-flex;align-items:center;gap:10px;font-size:1.45rem;font-weight:700;color:#222;text-decoration:none;background:rgba(255,255,255,0.92);border-radius:12px;padding:13px 32px 13px 20px;box-shadow:0 3px 12px rgba(90,156,203,0.10);transition:background 0.18s,color 0.18s;">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;"><path d="M21 12.79A9 9 0 0 1 12.21 3a7 7 0 1 0 8.79 9.79Z" stroke="#222" stroke-width="2" fill="#f7e7b7"/></svg>
-        After Dark Room
-      </a>
     </div>
+
     <hr style="border: none; border-top: 3px solid #d0d2d4; margin: 36px auto 48px auto; width: 80%; border-radius: 2px; box-shadow: 0 2px 8px rgba(90, 156, 203, 0.1);">
-    <!-- Galería -->
-    <!-- <section class="gallery" id="gallery"></section> -->
+
+    <!-- Galería After Dark Room -->
+    <section class="gallery" id="gallery"></section>
 
     <!-- Botones sociales -->
     <div class="social-buttons">
       <a href="https://instagram.com/esenshi7" class="social-btn instagram" target="_blank" aria-label="Instagram">
-        <!-- Instagram SVG monocromo -->
         <svg viewBox="0 0 448 448" width="70" height="70" fill="none"><circle cx="224" cy="224" r="224" fill="#fff"/><rect x="96" y="96" width="256" height="256" rx="76" stroke="#000" stroke-width="16" fill="none"/><circle cx="224" cy="224" r="64" stroke="#000" stroke-width="16" fill="none"/><circle cx="304" cy="144" r="16" fill="#000"/></svg>
       </a>
       <a href="https://x.com/ecchisenshi" class="social-btn x" target="_blank" aria-label="X">
-        <!-- X (Twitter) SVG oficial -->
         <svg viewBox="0 0 1200 1227" width="70" height="70" fill="none"><circle cx="600" cy="613.5" r="600" fill="#fff"/><path d="M908.6 320H1052L741.6 675.2L1102 1107.2H857.2L629.6 841.6L370.4 1107.2H226.4L555.2 726.4L216 320H468.8L670.4 563.2L908.6 320ZM864.8 1024H936L432.8 400H356.8L864.8 1024Z" fill="#000"/></svg>
       </a>
     </div>
@@ -74,19 +72,42 @@
     </div>
 
     <!-- Modal Disclaimer X (Twitter) -->
-    <div class="img-modal" id="xDisclaimerModal" style="display:none;z-index:3000;align-items:center;justify-content:center;">
+    <div class="img-modal" id="xDisclaimerModal" style="display:none;">
+      <div class="img-modal-instagram" style="max-width: 420px; flex-direction: column; align-items: center;">
+        <div class="img-modal-info" style="align-items: center; padding: 32px 24px 24px 24px; max-width: 100%;">
+          <div class="img-modal-desc" style="margin-top:0; text-align:center; font-size:1.15rem;">
+            <span style="font-size:1.1em; display:inline-flex; align-items:center; gap:8px; vertical-align:middle;">
+              <svg width="28" height="28" viewBox="0 0 38 38" fill="none" style="vertical-align:middle;"><circle cx="19" cy="19" r="18" stroke="#FFA500" stroke-width="2" fill="#FFF8E1"/><path d="M19 10V22" stroke="#FFA500" stroke-width="3" stroke-linecap="round"/><circle cx="19" cy="28" r="2" fill="#FFA500"/></svg>
+              <strong>Aviso de contenido sensible</strong>
+            </span><br><br>
+            <span style="font-size:.9em; font-weight:400;">
+              Estás a punto de salir del sitio y visitar una red social que puede contener contenido sensible, sugerente, censurado o NSFW (+18).<br>
+              Este material está dirigido a un público adulto.<br><br>
+              ¿Deseas continuar?
+            </span>
+          </div>
+          <div style="display:flex; gap:18px; justify-content:center; margin-top:24px;">
+            <button id="xDisclaimerContinue" style="background:#111; color:#fff;">Continuar</button>
+            <button id="xDisclaimerCancel" style="background:#bbb; color:#222;">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer +18 para acceso -->
+    <div id="afterDarkDisclaimer" style="position:fixed;z-index:3000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;">
       <div style="background:#fff;max-width:420px;width:90vw;padding:38px 28px 32px 28px;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.25);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;">
-        <div style="font-size:1.18rem;font-weight:700;color:#d9534f;letter-spacing:1px;display:flex;align-items:center;gap:10px;">
+        <div style="font-size:1.25rem;font-weight:700;color:#d9534f;letter-spacing:1px;display:flex;align-items:center;gap:10px;">
           <svg width="28" height="28" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="18" stroke="#FFA500" stroke-width="2" fill="#FFF8E1"/><path d="M19 10V22" stroke="#FFA500" stroke-width="3" stroke-linecap="round"/><circle cx="19" cy="28" r="2" fill="#FFA500"/></svg>
-          Aviso de contenido sensible
+          ADVERTENCIA · +18
         </div>
-        <div style="font-size:1.05rem;color:#222;line-height:1.6;margin-bottom:10px;">
-          Estás a punto de salir del sitio y visitar una red social que puede contener contenido sensible, sugerente, censurado o NSFW (+18).<br>
-          Este material está dirigido a un público adulto.<br><br>
-          ¿Deseas continuar?
+        <div style="font-size:1.08rem;color:#222;line-height:1.6;margin-bottom:10px;">
+          Esta sección contiene ilustraciones con contenido de tipo <b>ecchi</b>, atuendos provocativos y desnudos censurados.<br>
+          Aunque no incluye material explícito, está dirigida a una audiencia madura.<br>
+          <b>Al continuar, confirmas que tienes al menos 18 años.</b>
         </div>
-        <button id="xDisclaimerContinue" style="background:#111;color:#fff;font-size:1.08rem;font-weight:600;padding:11px 28px;border-radius:10px;border:none;cursor:pointer;margin-bottom:6px;">Continuar</button>
-        <button id="xDisclaimerCancel" style="background:#bbb;color:#222;font-size:1.08rem;font-weight:600;padding:11px 28px;border-radius:10px;border:none;cursor:pointer;">Cancelar</button>
+        <button id="afterDarkEnter" style="background:#111;color:#fff;font-size:1.13rem;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;margin-bottom:6px;">Entrar al After Dark Room</button>
+        <a href="/" style="color:#d9534f;font-size:1.05rem;text-decoration:underline;">Volver al inicio</a>
       </div>
     </div>
 
@@ -96,6 +117,16 @@
     </footer>
     
     <script type="module" src="script.js"></script>
+    <script>
+      // Lógica para mostrar/ocultar el disclaimer +18
+      const disclaimer = document.getElementById('afterDarkDisclaimer');
+      const enterBtn = document.getElementById('afterDarkEnter');
+      if (disclaimer && enterBtn) {
+        enterBtn.addEventListener('click', function() {
+          disclaimer.style.display = 'none';
+        });
+      }
+    </script>
   </div>
 </body>
 </html>
