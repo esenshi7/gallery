@@ -4,36 +4,40 @@ const supabaseUrl = 'https://qofkgqlhyzirokodbpuj.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvZmtncWxoeXppcm9rb2RicHVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyNjg5MDUsImV4cCI6MjA2Njg0NDkwNX0.dVWR1Qb6nLnd2ZUpRkRv0JlIyA2rNK2lb4eSZMad3w8';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Galería After Dark Room (solo las imágenes After Dark, sin descripciones en preview)
+// Galería After Dark Room (con propiedad order para ordenamiento explícito)
 const afterDarkImages = [
   {
     id: "akanehououji01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji_thumb.png",
-    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png"
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png",
+    order: 2
   },
   {
     id: "cowgirl01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl_thumb.png",
-    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png"
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//CowGirl.png",
+    order: 1
   }
 ];
 
 if (document.getElementById("gallery")) {
   const galleryEl = document.getElementById("gallery");
   galleryEl.innerHTML = "";
-  afterDarkImages.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "gallery-card";
-    const img = document.createElement("img");
-    img.src = item.imgUrl;
-    img.alt = "";
-    img.style.cursor = "pointer";
-    img.addEventListener("click", () => {
-      openMainModal(item);
+  afterDarkImages
+    .sort((a, b) => b.order - a.order)
+    .forEach(item => {
+      const card = document.createElement("div");
+      card.className = "gallery-card";
+      const img = document.createElement("img");
+      img.src = item.imgUrl;
+      img.alt = "";
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => {
+        openMainModal(item);
+      });
+      card.appendChild(img);
+      galleryEl.appendChild(card);
     });
-    card.appendChild(img);
-    galleryEl.appendChild(card);
-  });
 }
 
 // --- Modal Disclaimer X (Twitter) ---
@@ -62,52 +66,52 @@ if (xBtn && xDisclaimerModal && xDisclaimerContinue && xDisclaimerCancel) {
   });
 }
 
-// Galería principal para la página principal
+// Galería principal para la página principal (con propiedad order)
 const galleryMainData = [
   {
     id: "ariane01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ArianeTakahashi_Presentation_thumb.png",
     modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ArianeTakahashi_Presentation.png",
-    desc: "Ariane Takahashi presentándose."
+    order: 4
   },
   {
     id: "ukyo01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/UkyoKaya_thumb.png",
     modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/UkyoKaya.png",
-    desc: "Ukyo Kaya en pose casual."
+    order: 3
   },
   {
     id: "yor01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/Yor_thumb.png",
     modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/Yor.png",
-    desc: "Yor lista para la acción."
+    order: 2
   },
   {
     id: "zerotwo01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ZeroTwo_thumb.png",
     modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ZeroTwo.png",
-    desc: "Zero Two mirando al horizonte."
+    order: 1
   }
 ];
 
 const galleryMain = document.getElementById("gallery-main");
 if (galleryMain) {
-  galleryMainData.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "gallery-card";
-
-    const img = document.createElement("img");
-    img.src = item.imgUrl;
-    img.alt = item.desc;
-    img.style.cursor = "pointer";
-
-    img.addEventListener("click", () => {
-      openMainModal(item);
+  galleryMain.innerHTML = "";
+  galleryMainData
+    .sort((a, b) => b.order - a.order)
+    .forEach(item => {
+      const card = document.createElement("div");
+      card.className = "gallery-card";
+      const img = document.createElement("img");
+      img.src = item.imgUrl;
+      img.alt = "";
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => {
+        openMainModal(item);
+      });
+      card.appendChild(img);
+      galleryMain.appendChild(card);
     });
-
-    card.appendChild(img);
-    galleryMain.appendChild(card);
-  });
 }
 
 // Modal para galería principal
