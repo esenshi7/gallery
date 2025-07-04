@@ -7,6 +7,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Galería After Dark Room (con propiedad order para ordenamiento explícito)
 const afterDarkImages = [
   {
+    id: "marinkitagawa01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/After_Dark/Marin%20kitagawa_thumb.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/After_Dark/Marin%20Kitagawa.png",
+    order: 3
+  },
+  {
     id: "akanehououji01",
     imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji_thumb.png",
     modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus//Akane%20Hououji.png",
