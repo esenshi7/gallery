@@ -244,3 +244,169 @@ if (xBtn && xDisclaimerModal && xDisclaimerContinue && xDisclaimerCancel) {
     }
   });
 }
+
+// Galería principal para la página principal
+const galleryMainData = [
+  {
+    id: "ariane01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ArianeTakahashi_Presentation_thumb.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ArianeTakahashi_Presentation.png",
+    desc: "Ariane Takahashi presentándose."
+  },
+  {
+    id: "ukyo01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/UkyoKaya_thumb.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/UkyoKaya.png",
+    desc: "Ukyo Kaya en pose casual."
+  },
+  {
+    id: "yor01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/Yor_thumb.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/Yor.png",
+    desc: "Yor lista para la acción."
+  },
+  {
+    id: "zerotwo01",
+    imgUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ZeroTwo_thumb.png",
+    modalUrl: "https://qofkgqlhyzirokodbpuj.supabase.co/storage/v1/object/public/gallery-waifus/Normal/ZeroTwo.png",
+    desc: "Zero Two mirando al horizonte."
+  }
+];
+
+const galleryMain = document.getElementById("gallery-main");
+if (galleryMain) {
+  galleryMainData.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "gallery-card";
+
+    const img = document.createElement("img");
+    img.src = item.imgUrl;
+    img.alt = item.desc;
+    img.style.cursor = "pointer";
+
+    img.addEventListener("click", () => {
+      openMainModal(item);
+    });
+
+    card.appendChild(img);
+    galleryMain.appendChild(card);
+  });
+}
+
+// Modal para galería principal
+function openMainModal(item) {
+  let modal = document.getElementById("mainImgModal");
+  if (modal) {
+    modal.remove(); // Elimina cualquier modal previo antes de crear uno nuevo
+  }
+  // Crea el overlay de fondo
+  const overlay = document.createElement("div");
+  overlay.className = "img-modal active";
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100vw";
+  overlay.style.height = "100vh";
+  overlay.style.zIndex = "3000";
+  overlay.style.background = "rgba(30,30,40,0.7)";
+  overlay.style.display = "flex";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.id = "mainImgModal";
+
+  // Crea el modal visual
+  const modalDiv = document.createElement("div");
+  modalDiv.className = "img-modal-instagram";
+  modalDiv.style.width = "100vw";
+  modalDiv.style.height = "100vh";
+  modalDiv.style.display = "flex";
+  modalDiv.style.alignItems = "center";
+  modalDiv.style.justifyContent = "center";
+  modalDiv.style.background = "transparent";
+  modalDiv.style.padding = "0";
+  modalDiv.style.margin = "0";
+  modalDiv.style.borderRadius = "0";
+  modalDiv.style.boxShadow = "none";
+  modalDiv.style.position = "relative";
+
+  // Fondo clickeable dentro del modal
+  const bg = document.createElement("div");
+  bg.className = "img-modal-bg";
+  bg.style.position = "absolute";
+  bg.style.top = "0";
+  bg.style.left = "0";
+  bg.style.width = "100vw";
+  bg.style.height = "100vh";
+  bg.style.zIndex = "1";
+
+  // Imagen
+  const img = document.createElement("img");
+  img.className = "img-modal-content";
+  img.src = item.modalUrl;
+  img.alt = item.desc;
+  img.style.maxWidth = "100vw";
+  img.style.maxHeight = "100vh";
+  img.style.width = "auto";
+  img.style.height = "auto";
+  img.style.objectFit = "contain";
+  img.style.background = "transparent";
+  img.style.display = "block";
+  img.style.borderRadius = "0";
+  img.style.margin = "0";
+  img.style.zIndex = "2";
+  img.style.position = "relative";
+
+  // Botón de cerrar
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "img-modal-close";
+  closeBtn.setAttribute("aria-label", "Cerrar");
+  closeBtn.style.background = "rgba(255,255,255,0.7)";
+  closeBtn.style.borderRadius = "50%";
+  closeBtn.style.position = "absolute";
+  closeBtn.style.top = "18px";
+  closeBtn.style.right = "24px";
+  closeBtn.style.fontSize = "40px";
+  closeBtn.style.color = "#222";
+  closeBtn.style.cursor = "pointer";
+  closeBtn.style.fontWeight = "bold";
+  closeBtn.style.width = "56px";
+  closeBtn.style.height = "56px";
+  closeBtn.style.display = "flex";
+  closeBtn.style.alignItems = "center";
+  closeBtn.style.justifyContent = "center";
+  closeBtn.style.padding = "0";
+  closeBtn.style.zIndex = "10";
+  closeBtn.innerHTML = `
+    <svg viewBox="0 0 40 40" width="38" height="38">
+      <line x1="12" y1="12" x2="28" y2="28" stroke="#222" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="28" y1="12" x2="12" y2="28" stroke="#222" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+  `;
+
+  // Ensamblar modal
+  modalDiv.appendChild(bg);
+  modalDiv.appendChild(img);
+  modalDiv.appendChild(closeBtn);
+  overlay.appendChild(modalDiv);
+  document.body.appendChild(overlay);
+
+  // Cerrar al hacer clic fuera del modal (overlay)
+  overlay.addEventListener('mousedown', function(e) {
+    if (e.target === overlay) {
+      overlay.remove();
+    }
+  });
+  // Cerrar al hacer clic en el fondo dentro del modal
+  bg.addEventListener('mousedown', function(e) {
+    overlay.remove();
+  });
+  // Prevenir cierre al hacer clic en la imagen
+  img.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+  });
+  // Cerrar con el botón
+  closeBtn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    overlay.remove();
+  });
+}
