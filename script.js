@@ -49,19 +49,35 @@ const xDisclaimerCancel = document.getElementById('xDisclaimerCancel');
 if (xBtn && xDisclaimerModal && xDisclaimerContinue && xDisclaimerCancel) {
   xBtn.addEventListener('click', function(e) {
     e.preventDefault();
+    // Forzar display y clase active
     xDisclaimerModal.style.display = 'flex';
+    xDisclaimerModal.classList.add('active');
+    // Mostrar el contenido del modal (por si alguna regla global lo oculta)
+    const info = xDisclaimerModal.querySelector('.img-modal-info');
+    if (info) {
+      info.style.display = 'block';
+      info.style.setProperty('display', 'block', 'important');
+    }
+    const desc = xDisclaimerModal.querySelector('.img-modal-desc');
+    if (desc) {
+      desc.style.display = 'block';
+      desc.style.setProperty('display', 'block', 'important');
+    }
   });
   xDisclaimerContinue.addEventListener('click', function() {
     window.open('https://x.com/ecchisenshi', '_blank');
     xDisclaimerModal.style.display = 'none';
+    xDisclaimerModal.classList.remove('active');
   });
   xDisclaimerCancel.addEventListener('click', function() {
     xDisclaimerModal.style.display = 'none';
+    xDisclaimerModal.classList.remove('active');
   });
   // Cerrar modal al hacer clic fuera del contenido
   xDisclaimerModal.addEventListener('click', function(e) {
     if (e.target === xDisclaimerModal) {
       xDisclaimerModal.style.display = 'none';
+      xDisclaimerModal.classList.remove('active');
     }
   });
 }

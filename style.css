@@ -628,3 +628,76 @@ body {
   font-weight: bold;
 }
 */
+
+/* --- MODAL X (TWITTER) --- */
+#xDisclaimerModal {
+  display: none;
+  position: fixed;
+  z-index: 4000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30,30,40,0.7);
+  justify-content: center;
+  align-items: center;
+}
+#xDisclaimerModal.active {
+  display: flex;
+}
+#xDisclaimerModal .img-modal-instagram {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+}
+#xDisclaimerModal .img-modal-desc {
+  background: #fff;
+  max-width: 420px;
+  width: 90vw;
+  padding: 38px 28px 32px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 4100;
+  position: relative;
+  margin: 0 auto;
+  font-size: 1.15rem;
+}
+#xDisclaimerModal .img-modal-desc span {
+  font-size: 1.1em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  vertical-align: middle;
+}
+#xDisclaimerModal .img-modal-desc strong {
+  font-weight: bold;
+}
+#xDisclaimerModal .img-modal-desc button {
+  margin-top: 24px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 32px;
+  font-size: 1.13rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#xDisclaimerModal .img-modal-desc button#xDisclaimerCancel {
+  background: #bbb;
+  color: #222;
+  margin-left: 18px;
+}

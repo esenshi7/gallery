@@ -49,7 +49,7 @@
       <a href="https://instagram.com/esenshi7" class="social-btn instagram" target="_blank" aria-label="Instagram">
         <svg viewBox="0 0 448 448" width="70" height="70" fill="none"><circle cx="224" cy="224" r="224" fill="#fff"/><rect x="96" y="96" width="256" height="256" rx="76" stroke="#000" stroke-width="16" fill="none"/><circle cx="224" cy="224" r="64" stroke="#000" stroke-width="16" fill="none"/><circle cx="304" cy="144" r="16" fill="#000"/></svg>
       </a>
-      <a href="https://x.com/ecchisenshi" class="social-btn x" target="_blank" aria-label="X">
+      <a href="https://x.com/ecchisenshi" class="social-btn x" aria-label="X">
         <svg viewBox="0 0 1200 1227" width="70" height="70" fill="none"><circle cx="600" cy="613.5" r="600" fill="#fff"/><path d="M908.6 320H1052L741.6 675.2L1102 1107.2H857.2L629.6 841.6L370.4 1107.2H226.4L555.2 726.4L216 320H468.8L670.4 563.2L908.6 320ZM864.8 1024H936L432.8 400H356.8L864.8 1024Z" fill="#000"/></svg>
       </a>
     </div>
@@ -73,22 +73,20 @@
 
     <!-- Modal Disclaimer X (Twitter) -->
     <div class="img-modal" id="xDisclaimerModal" style="display:none;">
-      <div class="img-modal-instagram" style="max-width: 420px; flex-direction: column; align-items: center;">
-        <div class="img-modal-info" style="align-items: center; padding: 32px 24px 24px 24px; max-width: 100%;">
-          <div class="img-modal-desc" style="margin-top:0; text-align:center; font-size:1.15rem;">
-            <span style="font-size:1.1em; display:inline-flex; align-items:center; gap:8px; vertical-align:middle;">
-              <svg width="28" height="28" viewBox="0 0 38 38" fill="none" style="vertical-align:middle;"><circle cx="19" cy="19" r="18" stroke="#FFA500" stroke-width="2" fill="#FFF8E1"/><path d="M19 10V22" stroke="#FFA500" stroke-width="3" stroke-linecap="round"/><circle cx="19" cy="28" r="2" fill="#FFA500"/></svg>
-              <strong>Aviso de contenido sensible</strong>
-            </span><br><br>
-            <span style="font-size:.9em; font-weight:400;">
-              Estás a punto de salir del sitio y visitar una red social que puede contener contenido sensible, sugerente, censurado o NSFW (+18).<br>
-              Este material está dirigido a un público adulto.<br><br>
-              ¿Deseas continuar?
-            </span>
+      <div class="img-modal-instagram" style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:transparent;padding:0;margin:0;border-radius:0;box-shadow:none;position:relative;">
+        <div style="background:#fff;max-width:420px;width:90vw;padding:38px 28px 32px 28px;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.25);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;z-index:4100;position:relative;">
+          <div style="font-size:1.25rem;font-weight:700;color:#d9534f;letter-spacing:1px;display:flex;align-items:center;gap:10px;">
+            <svg width="28" height="28" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="18" stroke="#FFA500" stroke-width="2" fill="#FFF8E1"/><path d="M19 10V22" stroke="#FFA500" stroke-width="3" stroke-linecap="round"/><circle cx="19" cy="28" r="2" fill="#FFA500"/></svg>
+            AVISO · +18
+          </div>
+          <div style="font-size:1.08rem;color:#222;line-height:1.6;margin-bottom:10px;">
+            Estás a punto de salir del sitio y visitar una red social que puede contener contenido sensible, sugerente, censurado o NSFW (+18).<br>
+            Este material está dirigido a un público adulto.<br>
+            <b>¿Deseas continuar?</b>
           </div>
           <div style="display:flex; gap:18px; justify-content:center; margin-top:24px;">
-            <button id="xDisclaimerContinue" style="background:#111; color:#fff;">Continuar</button>
-            <button id="xDisclaimerCancel" style="background:#bbb; color:#222;">Cancelar</button>
+            <button id="xDisclaimerContinue" style="background:#111;color:#fff;font-size:1.13rem;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;margin-bottom:6px;">Continuar</button>
+            <button id="xDisclaimerCancel" style="background:#bbb;color:#222;font-size:1.13rem;font-weight:600;padding:12px 32px;border-radius:10px;border:none;cursor:pointer;margin-bottom:6px;">Cancelar</button>
           </div>
         </div>
       </div>
